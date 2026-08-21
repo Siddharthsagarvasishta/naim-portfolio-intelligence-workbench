@@ -17,14 +17,8 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
       - name: Install backend
         run: python -m pip install -e ".[analytics,interop,dev]"
-      - name: Install document-generation dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Lint backend
         run: |
           python scripts/check_public_brand.py
@@ -39,12 +33,13 @@ jobs:
         env:
           PYTHONPATH: src
           NAIM_DATASET_PROFILE: test
-          NAIM_ARTIFACT_TOOL_NODE_MODULES: ${{ github.workspace }}/node_modules
         # The full release runner covers artifact-backed tests after generating the
-        # governed evidence, BI, Office, and showcase outputs. Those large generated
-        # artifacts are intentionally excluded from the public source checkout.
+        # governed evidence, BI, Office, Executive Pack, and showcase outputs. Their
+        # generated inputs and platform-specific renderer are intentionally excluded
+        # from the public source checkout.
         run: |
           python -m pytest --cov=src/naim_risk --cov-report=term-missing \
+            --ignore=tests/integration/test_p0_executive_pack.py \
             --ignore=tests/unit/test_feature_status.py \
             --ignore=tests/unit/test_powerbi_project.py \
             --ignore=tests/unit/test_public_showcase.py
