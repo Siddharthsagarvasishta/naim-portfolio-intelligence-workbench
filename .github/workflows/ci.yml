@@ -18,7 +18,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install backend
-        run: python -m pip install -e ".[analytics,dev]"
+        run: python -m pip install -e ".[analytics,interop,dev]"
       - name: Lint backend
         run: |
           python scripts/check_public_brand.py
