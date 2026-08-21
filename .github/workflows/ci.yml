@@ -39,6 +39,7 @@ jobs:
         env:
           PYTHONPATH: src
           NAIM_DATASET_PROFILE: test
+          NAIM_ARTIFACT_TOOL_NODE_MODULES: ${{ github.workspace }}/node_modules
         # The full release runner covers artifact-backed tests after generating the
         # governed evidence, BI, Office, and showcase outputs. Those large generated
         # artifacts are intentionally excluded from the public source checkout.
