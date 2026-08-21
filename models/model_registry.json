@@ -1,0 +1,109 @@
+{
+  "registry_version": "1.0.0",
+  "models": [
+    {
+      "model_id": "SCENARIO_PROJECTION_V1",
+      "use_case": "Twelve-month portfolio planning scenarios",
+      "version": "1.0.0",
+      "algorithm": "Transparent recursive state projection with configured elasticities",
+      "training_window": null,
+      "validation_window": "Latest synthetic history",
+      "test_window": null,
+      "feature_set": [
+        "active_accounts",
+        "receivables",
+        "delinquency_30_rate",
+        "annualised_net_loss_rate",
+        "fraud_bps",
+        "consumer_stress_index",
+        "unemployment_rate",
+        "fraud_pressure_index"
+      ],
+      "target": "Scenario portfolio outcomes",
+      "hyperparameters": "config/economic_scenarios.json",
+      "performance": "Compared with latest-state naive reference in tests; no fabricated accuracy claim",
+      "calibration": "Not a probability score",
+      "approved_use": "Synthetic portfolio planning and sensitivity analysis",
+      "prohibited_use": "Regulatory capital, customer-level decisions, production forecasts",
+      "limitations": "Illustrative elasticities and uncertainty ranges",
+      "artefact_path": "src/naim_risk/forecasting/scenarios.py",
+      "random_seed": 73421,
+      "status": "implemented"
+    },
+    {
+      "model_id": "CUSTOMER_SEGMENTATION_KMEANS_V1",
+      "use_case": "Exploratory behavioural segmentation of synthetic portfolio accounts",
+      "version": "1.0.0",
+      "algorithm": "StandardScaler plus seeded K-Means with candidate-cluster diagnostics",
+      "training_window": "Trailing six reporting months",
+      "validation_window": "Same-window stability refit with an alternate deterministic seed",
+      "test_window": null,
+      "feature_set": [
+        "average_balance",
+        "average_utilization",
+        "transaction_frequency",
+        "transaction_value",
+        "inflow_volatility",
+        "payment_ratio",
+        "delinquency_incidence",
+        "risk_score",
+        "fraud_alerts",
+        "customer_friction",
+        "tenure"
+      ],
+      "target": "Unsupervised cluster membership",
+      "hyperparameters": {
+        "candidate_clusters": [
+          3,
+          4,
+          5
+        ],
+        "n_init": 20,
+        "minimum_cluster_share": 0.02
+      },
+      "performance": "Live API reports silhouette score, cluster size control, and alternate-seed adjusted Rand index; no fabricated fixed score is registered",
+      "calibration": "Not a probability score",
+      "approved_use": "Synthetic exploratory portfolio segmentation and strategy hypothesis generation",
+      "prohibited_use": "Production customer-level credit, pricing, eligibility, or adverse-action decisions",
+      "limitations": "Descriptive and non-causal; cluster meaning and stability depend on the selected observation window and synthetic feature distribution",
+      "artefact_path": "src/naim_risk/segmentation/statistical.py",
+      "random_seed": 73421,
+      "status": "implemented"
+    },
+    {
+      "model_id": "SEGMENT_SURROGATE_TREE_V1",
+      "use_case": "Human-readable approximation of K-Means segment membership",
+      "version": "1.0.0",
+      "algorithm": "Seeded DecisionTreeClassifier surrogate",
+      "training_window": "Trailing six reporting months",
+      "validation_window": "In-window fidelity diagnostic against K-Means labels",
+      "test_window": null,
+      "feature_set": "CUSTOMER_SEGMENTATION_KMEANS_V1 transformed feature set",
+      "target": "K-Means cluster membership",
+      "hyperparameters": {
+        "max_depth": 3,
+        "minimum_leaf_share": 0.03,
+        "minimum_leaf_observations": 10
+      },
+      "performance": "Live API reports surrogate fidelity, realised depth, and leaf count; no predictive-performance claim is made",
+      "calibration": "Not a probability score",
+      "approved_use": "Explain approximate synthetic segment characteristics",
+      "prohibited_use": "Causal explanation, production decisions, or use as a customer risk score",
+      "limitations": "Rules are a lossy approximation of K-Means membership and can omit interactions represented by the clustering solution",
+      "artefact_path": "src/naim_risk/segmentation/statistical.py",
+      "random_seed": 73421,
+      "status": "implemented"
+    },
+    {
+      "model_id": "ACCOUNT_DELINQUENCY_EXPLANATION",
+      "use_case": "Next-month delinquency behavioural explanation",
+      "version": "0.1.0",
+      "algorithm": "Logistic baseline plus non-linear challenger",
+      "approved_use": "Future governed analytical extension",
+      "prohibited_use": "Customer-level adverse action",
+      "limitations": "Registered integration only; no trained artefact or performance claim is shipped",
+      "artefact_path": null,
+      "status": "documented_integration"
+    }
+  ]
+}

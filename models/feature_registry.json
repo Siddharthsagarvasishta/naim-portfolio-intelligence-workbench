@@ -1,0 +1,43 @@
+{
+  "registry_version": "1.0.0",
+  "protected_attributes_used": false,
+  "features": [
+    {
+      "feature_name": "utilization",
+      "business_meaning": "Account balance divided by credit limit",
+      "source": "monthly_account_performance",
+      "calculation": "account_balance / credit_limit",
+      "observation_window": "reporting month",
+      "missing_treatment": "Undefined for zero limit; never silently set to a business zero",
+      "leakage_risk": "Low when lagged for next-month outcomes",
+      "approved_model_uses": ["delinquency explanation", "scenario diagnostics"],
+      "owner": "Portfolio Risk Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_name": "payment_to_statement_ratio",
+      "business_meaning": "Payment amount relative to statement balance",
+      "source": "curated_account_month",
+      "calculation": "payment_amount / statement_balance",
+      "observation_window": "reporting month",
+      "missing_treatment": "Undefined for zero statement balance",
+      "leakage_risk": "Must be lagged for future-outcome models",
+      "approved_model_uses": ["delinquency explanation"],
+      "owner": "Credit Risk Strategy",
+      "version": "1.0.0"
+    },
+    {
+      "feature_name": "customer_friction_flag",
+      "business_meaning": "At least one review, decline, step-up or avoidable contact",
+      "source": "curated_account_month",
+      "calculation": "approved event-composition rule",
+      "observation_window": "reporting month",
+      "missing_treatment": "Missing events remain unknown",
+      "leakage_risk": "Use only events observed before the target window",
+      "approved_model_uses": ["attrition explanation", "operational workload"],
+      "owner": "Customer Risk Experience",
+      "version": "1.0.0"
+    }
+  ]
+}
+

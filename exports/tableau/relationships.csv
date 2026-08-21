@@ -1,0 +1,6 @@
+logical_table,related_table,relationship_fields,cardinality,referential_integrity,notes
+kpi_snapshot,evidence_scope,evidence_scope_key,many-to-one,All records match,Shared governed evidence anchor
+strategy_snapshot,evidence_scope,evidence_scope_key,many-to-one,All records match,Independent strategy grain
+entity_rating_snapshot,evidence_scope,evidence_scope_key,many-to-one,All records match,Independent entity grain
+scenario_snapshot,evidence_scope,evidence_scope_key,many-to-one,All records match,Independent scenario grain
+kpi_snapshot,metric_dictionary,metric_id,many-to-one,Some records match,Metric metadata for governed KPI rows

@@ -1,0 +1,103 @@
+{
+  "rule_version": "2.0.0",
+  "rules": [
+    {
+      "alert_rule_id": "LOSS_ABSOLUTE",
+      "metric_id": "ANNUALISED_NET_LOSS_RATE",
+      "alert_name": "Annualised loss rate exceeds planning guardrail",
+      "comparison_method": "absolute_threshold",
+      "absolute_threshold": 0.075,
+      "minimum_denominator": 100,
+      "consecutive_periods": 1,
+      "severity": "Adverse",
+      "cooldown_period": 1,
+      "sla_hours": 24,
+      "owner_role": "Credit Risk Strategy",
+      "recommended_investigation": "Review vintage, acquisition mix and delinquency transitions."
+    },
+    {
+      "alert_rule_id": "LOSS_MOVEMENT",
+      "metric_id": "ANNUALISED_NET_LOSS_RATE",
+      "alert_name": "Loss rate increased materially",
+      "comparison_method": "basis_point_movement",
+      "relative_threshold": 20,
+      "minimum_denominator": 100,
+      "consecutive_periods": 1,
+      "severity": "Adverse",
+      "cooldown_period": 1,
+      "sla_hours": 24,
+      "owner_role": "Portfolio Risk Analytics",
+      "recommended_investigation": "Run the reconciled mix and within-segment decomposition."
+    },
+    {
+      "alert_rule_id": "DELINQ_PERSISTENT",
+      "metric_id": "DELINQUENCY_30_ACCOUNT_RATE",
+      "alert_name": "30+ delinquency deteriorated for consecutive periods",
+      "comparison_method": "persistent_increase",
+      "relative_threshold": 5,
+      "minimum_denominator": 100,
+      "consecutive_periods": 2,
+      "severity": "Adverse",
+      "cooldown_period": 1,
+      "sla_hours": 24,
+      "owner_role": "Credit Risk Strategy",
+      "recommended_investigation": "Inspect maturity-aligned vintages and roll-forward rates."
+    },
+    {
+      "alert_rule_id": "FALSE_POSITIVE_GUARDRAIL",
+      "metric_id": "FALSE_POSITIVE_RATE",
+      "alert_name": "False-positive rate exceeds operational guardrail",
+      "comparison_method": "absolute_threshold",
+      "absolute_threshold": 0.72,
+      "minimum_denominator": 100,
+      "consecutive_periods": 1,
+      "severity": "Watch",
+      "cooldown_period": 1,
+      "sla_hours": 72,
+      "owner_role": "Fraud Risk Strategy",
+      "recommended_investigation": "Review alert thresholds, confirmed-event yield and review outcomes."
+    },
+    {
+      "alert_rule_id": "FRICTION_GUARDRAIL",
+      "metric_id": "CUSTOMER_FRICTION_RATE",
+      "alert_name": "Customer-friction rate exceeds planning guardrail",
+      "comparison_method": "absolute_threshold",
+      "absolute_threshold": 0.12,
+      "minimum_denominator": 100,
+      "consecutive_periods": 1,
+      "severity": "Watch",
+      "cooldown_period": 1,
+      "sla_hours": 72,
+      "owner_role": "Customer Risk Experience",
+      "recommended_investigation": "Review review, decline, step-up and contact event composition."
+    },
+    {
+      "alert_rule_id": "COMPLETENESS",
+      "metric_id": "DATA_COMPLETENESS",
+      "alert_name": "Source-data completeness fell below threshold",
+      "comparison_method": "data_quality",
+      "absolute_threshold": 0.995,
+      "minimum_denominator": 1,
+      "consecutive_periods": 1,
+      "severity": "Critical",
+      "cooldown_period": 0,
+      "sla_hours": 4,
+      "owner_role": "Data Steward",
+      "recommended_investigation": "Stop publication and reconcile missing or quarantined records."
+    },
+    {
+      "alert_rule_id": "LOSS_CONCENTRATION",
+      "metric_id": "ANNUALISED_NET_LOSS_RATE",
+      "alert_name": "One segment explains more than 40% of adverse loss movement",
+      "comparison_method": "contribution_share_threshold",
+      "absolute_threshold": 0.4,
+      "minimum_denominator": 100,
+      "consecutive_periods": 1,
+      "severity": "Adverse",
+      "cooldown_period": 1,
+      "sla_hours": 24,
+      "owner_role": "Portfolio Risk Analytics",
+      "recommended_investigation": "Review the reconciled mix and within-segment contribution evidence."
+    }
+  ]
+}

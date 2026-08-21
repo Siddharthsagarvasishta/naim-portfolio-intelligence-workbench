@@ -1,0 +1,6 @@
+from_table,from_column,to_table,to_column,cardinality,cross_filter,active,notes
+evidence_scope,evidence_scope_key,kpi_snapshot,evidence_scope_key,one-to-many,single,true,Shared governed evidence anchor
+evidence_scope,evidence_scope_key,strategy_snapshot,evidence_scope_key,one-to-many,single,true,Independent strategy grain
+evidence_scope,evidence_scope_key,entity_rating_snapshot,evidence_scope_key,one-to-many,single,true,Independent entity grain
+evidence_scope,evidence_scope_key,scenario_snapshot,evidence_scope_key,one-to-many,single,true,Independent scenario grain
+metric_dictionary,metric_id,kpi_snapshot,metric_id,one-to-many,single,true,Governed metadata for included KPI metrics

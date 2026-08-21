@@ -1,0 +1,20 @@
+dataset,column,business_definition,type,format,governance_note
+evidence_scope,evidence_scope_key,Compound evidence-run-period anchor,character,$192.,One row per bounded package scope
+evidence_scope,evidence_sha256,SHA-256 evidence digest,character,$64.,Display in reconciliation footer
+evidence_scope,account_month_rows,Validated account-month source count,numeric,comma18.,Synthetic source truth
+kpi_snapshot,evidence_id,Versioned evidence identifier,character,$64.,Required reconciliation key
+kpi_snapshot,evidence_scope_key,Compound scope relationship key,character,$192.,Relates only to evidence_scope
+kpi_snapshot,reporting_period,Selected analytical month,character,yymmdd10. on import,ISO source string
+kpi_snapshot,metric_id,Governed metric identifier,character,$64.,Join to metric registry
+kpi_snapshot,value,Calculated current value,numeric,best32.,Do not format as text
+kpi_snapshot,prior_value,Calculated comparison value,numeric,best32.,Same metric version
+kpi_snapshot,denominator,Governed denominator or population,numeric,best32.,Inspect before rate comparison
+kpi_snapshot,unit,Measure unit,character,$32.,Controls display and aggregation
+strategy_snapshot,strategy,Effective strategy label,character,$64.,Synthetic
+strategy_snapshot,fraud_bps,Confirmed fraud loss basis points,numeric,12.4,Ratio of sums
+strategy_snapshot,false_positive_rate,Flagged legitimate / resolved flags,numeric,percent12.2,Expose denominator
+entity_rating_snapshot,rating_score,Transparent internal 0-100 score,numeric,8.2,Not an agency rating
+scenario_snapshot,total_expected_profit,12-month conditional expected profit,numeric,comma18.2,Scenario estimate
+metric_dictionary,metric_id,Governed metric identifier,character,$64.,Metadata relationship to kpi_snapshot
+metric_dictionary,business_definition,Approved business definition,character,$500.,Do not overwrite in analysis
+metric_dictionary,formula,Governed formula text,character,$500.,Descriptive metadata not executable SAS

@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://naim.local/schemas/cross-artifact-reconciliation.schema.json",
+  "title": "nAIM cross-artifact reconciliation result",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "product",
+    "generated_at_utc",
+    "result",
+    "release_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "schema_reference": {
+      "const": "schemas/cross-artifact-reconciliation.schema.json"
+    },
+    "product": {
+      "const": "nAIM Portfolio Intelligence Workbench"
+    },
+    "generated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "result": {
+      "enum": ["PASS", "FAIL", "INCOMPLETE"]
+    },
+    "release_allowed": {
+      "type": "boolean"
+    },
+    "fatal_error": {
+      "type": "string"
+    },
+    "methodology": {
+      "type": "object"
+    },
+    "canonical": {
+      "$ref": "#/$defs/canonical"
+    },
+    "channels": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "$ref": "#/$defs/channel"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "required_channel_count",
+        "channel_status_counts",
+        "failed_check_count",
+        "missing_or_unverifiable_check_count",
+        "blocking_checks"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "release_allowed": {
+            "const": true
+          }
+        },
+        "required": ["canonical", "channels", "summary"]
+      },
+      "else": {
+        "properties": {
+          "release_allowed": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "required", "outcome", "expected", "actual"],
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "outcome": {
+          "enum": ["PASS", "FAIL", "MISSING", "UNVERIFIABLE", "NOT_APPLICABLE"]
+        },
+        "expected": {},
+        "actual": {},
+        "tolerance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "detail": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "channel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id",
+        "label",
+        "required",
+        "status",
+        "artifact_paths",
+        "artifacts",
+        "checks",
+        "notes"
+      ],
+      "properties": {
+        "channel_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string"
+        },
+        "required": {
+          "const": true
+        },
+        "status": {
+          "enum": ["PASS", "FAIL", "INCOMPLETE"]
+        },
+        "artifact_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "bytes", "sha256"],
+            "properties": {
+              "path": {"type": "string"},
+              "bytes": {"type": "integer", "minimum": 0},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/check"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "canonical": {
+      "type": "object",
+      "required": [
+        "source_path",
+        "source_file_sha256",
+        "source_payload_sha256",
+        "approved_control_period",
+        "approved_control_basket",
+        "story",
+        "checks",
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": ["PASS", "FAIL", "INCOMPLETE"]
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/check"
+          }
+        },
+        "story": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

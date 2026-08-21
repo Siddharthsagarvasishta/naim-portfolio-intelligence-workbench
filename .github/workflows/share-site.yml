@@ -1,0 +1,72 @@
+name: Build optional nAIM share site
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the validated build to GitHub Pages
+        required: true
+        type: boolean
+        default: false
+      repository_url:
+        description: Optional public repository URL shown in the site
+        required: false
+        type: string
+      contact:
+        description: Optional public contact label shown in the site
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: naim-share-site-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install smoke-test dependencies
+        run: python -m pip install -e ".[analytics,dev,public-demo]"
+      - name: Build and validate backend-free site
+        env:
+          PUBLIC_REPOSITORY_URL: ${{ inputs.repository_url }}
+          PUBLIC_CONTACT: ${{ inputs.contact }}
+        run: |
+          args=()
+          if [[ -n "$PUBLIC_REPOSITORY_URL" ]]; then args+=(--repository-url "$PUBLIC_REPOSITORY_URL"); fi
+          if [[ -n "$PUBLIC_CONTACT" ]]; then args+=(--contact "$PUBLIC_CONTACT"); fi
+          python scripts/build_share_site.py "${args[@]}"
+          python -m pytest tests/unit/test_public_showcase.py
+      - name: Retain validated build for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: naim-share-site
+          path: outputs/share_site
+          if-no-files-found: error
+      - name: Package GitHub Pages artifact
+        if: ${{ inputs.publish }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: outputs/share_site
+
+  deploy:
+    if: ${{ inputs.publish }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy reviewed artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

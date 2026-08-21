@@ -1,0 +1,55 @@
+"""Market Risk and Volatility Lab, isolated from the core portfolio engine."""
+
+from naim_risk.market_risk.analytics import (
+    ReturnPreparation,
+    backtest_var,
+    calculate_var_es,
+    compare_volatility_models,
+    ewma_volatility,
+    fit_conditional_volatility,
+    historical_volatility,
+    implied_volatility,
+    prepare_returns,
+    run_market_risk_lab,
+    volatility_diagnostics,
+    volatility_regimes,
+)
+from naim_risk.market_risk.exports import export_market_risk_bundle
+from naim_risk.market_risk.providers import (
+    ConfiguredExternalProvider,
+    DeterministicSampleProvider,
+    ExternalProviderConfiguration,
+    ExternalProviderUnavailable,
+    InstrumentSelection,
+    MarketDataError,
+    MarketDataProvider,
+    MarketPriceFrame,
+    StaticMarketDataProvider,
+    UploadedFileProvider,
+)
+
+__all__ = [
+    "ConfiguredExternalProvider",
+    "DeterministicSampleProvider",
+    "ExternalProviderConfiguration",
+    "ExternalProviderUnavailable",
+    "InstrumentSelection",
+    "MarketDataError",
+    "MarketDataProvider",
+    "MarketPriceFrame",
+    "StaticMarketDataProvider",
+    "UploadedFileProvider",
+    "ReturnPreparation",
+    "backtest_var",
+    "calculate_var_es",
+    "compare_volatility_models",
+    "ewma_volatility",
+    "fit_conditional_volatility",
+    "historical_volatility",
+    "implied_volatility",
+    "prepare_returns",
+    "run_market_risk_lab",
+    "volatility_diagnostics",
+    "volatility_regimes",
+    "export_market_risk_bundle",
+]

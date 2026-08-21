@@ -1,0 +1,434 @@
+{
+  "aim_expansion": "All Is Mine",
+  "comparison_period": "2025-07-01",
+  "data_mode": "OFFLINE_SNAPSHOT",
+  "decomposition": {
+    "causal_status": "ASSOCIATIONAL",
+    "contribution_share": 1.0687666932274695,
+    "dimension": "acquisition_channel",
+    "method": "exact additive mix and within-segment bridge",
+    "mix_bps": 4.433506460154617,
+    "primary_driver": "Affiliate",
+    "recommended_investigation": [
+      "review acquisition quality and maturity-aligned vintages",
+      "review Challenger B eligibility and operational guardrails",
+      "inspect payment behaviour and utilization for the concentrated segment"
+    ],
+    "residual_bps": 5.204170427930421e-14,
+    "within_segment_bps": 306.9814984633076
+  },
+  "evidence_id": "NAIM-default-73421-236b6973fd52-2025-08",
+  "kpi_snapshot": [
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "ACTIVE_ACCOUNTS",
+      "metric_version": "2.0.0",
+      "name": "Active accounts",
+      "prior_value": 22761.0,
+      "reporting_period": "2025-08-01",
+      "unit": "accounts",
+      "value": 22531.0
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "ACCOUNT_GROWTH",
+      "metric_version": "2.0.0",
+      "name": "Account growth",
+      "prior_value": -0.008321714883234521,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": -0.01010500417380611
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "ENDING_RECEIVABLES",
+      "metric_version": "2.0.0",
+      "name": "Ending receivables",
+      "prior_value": 23038891.92,
+      "reporting_period": "2025-08-01",
+      "unit": "currency",
+      "value": 21950377.08
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "TRANSACTION_VALUE",
+      "metric_version": "2.0.0",
+      "name": "Transaction value",
+      "prior_value": 41389993.89,
+      "reporting_period": "2025-08-01",
+      "unit": "currency",
+      "value": 38617388.099999994
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "UTILIZATION",
+      "metric_version": "2.0.0",
+      "name": "Portfolio utilization",
+      "prior_value": 0.07772108891133224,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.0746402777182706
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "DELINQUENCY_30_ACCOUNT_RATE",
+      "metric_version": "2.0.0",
+      "name": "30+ delinquency rate",
+      "prior_value": 0.049075172444092964,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.046158625893213796
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "ANNUALISED_NET_LOSS_RATE",
+      "metric_version": "2.0.0",
+      "name": "Annualised net loss rate",
+      "prior_value": 0.035714829388391336,
+      "reporting_period": "2025-08-01",
+      "unit": "annualised_rate",
+      "value": 0.06685632988073756
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "FRAUD_BPS",
+      "metric_version": "2.0.0",
+      "name": "Confirmed fraud rate",
+      "prior_value": 16.044102392594,
+      "reporting_period": "2025-08-01",
+      "unit": "basis_points",
+      "value": 15.132654712088105
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "FRAUD_ALERT_TRANSACTION_RATE",
+      "metric_version": "2.0.0",
+      "name": "Fraud-alert transaction rate",
+      "prior_value": 0.004673044013748929,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.004748979337148562
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "MANUAL_REVIEW_RATE",
+      "metric_version": "2.0.0",
+      "name": "Manual-review rate",
+      "prior_value": 0.003596421591934967,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.0036213474532456186
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "FALSE_POSITIVE_RATE",
+      "metric_version": "2.0.0",
+      "name": "False-positive rate",
+      "prior_value": 0.8027790228597041,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.8090098545283905
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "CUSTOMER_FRICTION_RATE",
+      "metric_version": "2.0.0",
+      "name": "Customer-friction rate",
+      "prior_value": 0.41957734721673035,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.4093471217433758
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "COMPLAINT_RATE_PER_1000",
+      "metric_version": "2.0.0",
+      "name": "Complaint rate",
+      "prior_value": 18.276877114362286,
+      "reporting_period": "2025-08-01",
+      "unit": "per_1000",
+      "value": 18.108384004260795
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "ATTRITION_RATE",
+      "metric_version": "2.0.0",
+      "name": "Attrition rate",
+      "prior_value": 0.006927500871383757,
+      "reporting_period": "2025-08-01",
+      "unit": "rate",
+      "value": 0.007029568120908571
+    },
+    {
+      "comparison_period": "2025-07-01",
+      "metric_id": "EXPECTED_PROFIT",
+      "metric_version": "2.0.0",
+      "name": "Expected portfolio profit",
+      "prior_value": 246838.09128599998,
+      "reporting_period": "2025-08-01",
+      "unit": "currency",
+      "value": 171934.688816
+    }
+  ],
+  "limitations": [
+    "Observational decomposition and strategy views are associational unless a valid randomised design is explicitly identified.",
+    "Annualised monthly rates are presentation measures, not forecasts.",
+    "The selected August 2025 deterioration is a seeded synthetic demonstration story.",
+    "Scenario and market-risk outputs are conditional estimates, not regulatory stress tests or maximum-loss estimates.",
+    "This public surface is read-only and intentionally omits raw records and administrative controls."
+  ],
+  "loss_rate_trend": [
+    {
+      "month": "2024-01-01",
+      "unit": "annualised_rate",
+      "value": 0.0
+    },
+    {
+      "month": "2024-02-01",
+      "unit": "annualised_rate",
+      "value": 0.0
+    },
+    {
+      "month": "2024-03-01",
+      "unit": "annualised_rate",
+      "value": 0.0
+    },
+    {
+      "month": "2024-04-01",
+      "unit": "annualised_rate",
+      "value": 0.00317176145934321
+    },
+    {
+      "month": "2024-05-01",
+      "unit": "annualised_rate",
+      "value": -0.00012667145935489044
+    },
+    {
+      "month": "2024-06-01",
+      "unit": "annualised_rate",
+      "value": 0.006274213547923891
+    },
+    {
+      "month": "2024-07-01",
+      "unit": "annualised_rate",
+      "value": 0.008461623311422936
+    },
+    {
+      "month": "2024-08-01",
+      "unit": "annualised_rate",
+      "value": 0.0012263315834072025
+    },
+    {
+      "month": "2024-09-01",
+      "unit": "annualised_rate",
+      "value": 0.00791728079279691
+    },
+    {
+      "month": "2024-10-01",
+      "unit": "annualised_rate",
+      "value": 0.00241432441335717
+    },
+    {
+      "month": "2024-11-01",
+      "unit": "annualised_rate",
+      "value": 0.005058650374532702
+    },
+    {
+      "month": "2024-12-01",
+      "unit": "annualised_rate",
+      "value": 0.0013515264732666481
+    },
+    {
+      "month": "2025-01-01",
+      "unit": "annualised_rate",
+      "value": 0.009079557840508814
+    },
+    {
+      "month": "2025-02-01",
+      "unit": "annualised_rate",
+      "value": 0.006450997950234111
+    },
+    {
+      "month": "2025-03-01",
+      "unit": "annualised_rate",
+      "value": 0.007842269023842462
+    },
+    {
+      "month": "2025-04-01",
+      "unit": "annualised_rate",
+      "value": 0.020636844461998972
+    },
+    {
+      "month": "2025-05-01",
+      "unit": "annualised_rate",
+      "value": 0.027652127054596173
+    },
+    {
+      "month": "2025-06-01",
+      "unit": "annualised_rate",
+      "value": 0.037788922766171684
+    },
+    {
+      "month": "2025-07-01",
+      "unit": "annualised_rate",
+      "value": 0.035714829388391336
+    },
+    {
+      "month": "2025-08-01",
+      "unit": "annualised_rate",
+      "value": 0.06685632988073756
+    },
+    {
+      "month": "2025-09-01",
+      "unit": "annualised_rate",
+      "value": 0.03978169332941279
+    },
+    {
+      "month": "2025-10-01",
+      "unit": "annualised_rate",
+      "value": 0.03628957555322157
+    },
+    {
+      "month": "2025-11-01",
+      "unit": "annualised_rate",
+      "value": 0.025038240468105814
+    },
+    {
+      "month": "2025-12-01",
+      "unit": "annualised_rate",
+      "value": 0.021569968580418458
+    }
+  ],
+  "market_risk": {
+    "instrument": "NAIM-DEMO-INDEX",
+    "limitations": [
+      "Results depend on data quality, price basis, sample period, and modelling assumptions.",
+      "Forecasts and tail-risk estimates can fail under structural change or extreme illiquidity.",
+      "No output is investment advice, a trade signal, or a maximum-loss estimate."
+    ],
+    "model_comparison": [
+      {
+        "diagnostic_status": "non_parametric",
+        "forecast_volatility": 0.15650832932979966,
+        "model": "historical",
+        "qlike": -8.491198707311119
+      },
+      {
+        "diagnostic_status": "non_parametric",
+        "forecast_volatility": 0.12879159516206592,
+        "model": "rolling",
+        "qlike": -8.495952598670728
+      },
+      {
+        "diagnostic_status": "non_parametric",
+        "forecast_volatility": 0.12842434243404896,
+        "model": "ewma",
+        "qlike": -8.490547351067201
+      },
+      {
+        "diagnostic_status": "implemented",
+        "forecast_volatility": 0.1564829454164297,
+        "model": "arch",
+        "qlike": -8.49128061820304
+      },
+      {
+        "diagnostic_status": "implemented",
+        "forecast_volatility": 0.1519102720368773,
+        "model": "garch",
+        "qlike": -8.498186976657625
+      }
+    ],
+    "observation_count": 1042,
+    "provider": "bundled_deterministic_sample",
+    "source_is_synthetic": true,
+    "status": "LIVE",
+    "summary": {
+      "confidence": 0.99,
+      "ewma_forecast_volatility": 0.12497692441547356,
+      "historical_expected_shortfall": 0.03228082249152459,
+      "historical_var": 0.024664297021394704,
+      "historical_volatility": 0.15248343769552541
+    },
+    "trading_recommendation": false,
+    "validation_status": "PASS"
+  },
+  "portfolio_story": {
+    "current_annualised_net_loss_rate": 0.06685632988073756,
+    "data_quality_status": "PASS",
+    "denominator": 22484722.130000003,
+    "metric_id": "ANNUALISED_NET_LOSS_RATE",
+    "metric_version": "2.0.0",
+    "observed_change_bps": 311.4150049234624,
+    "prior_annualised_net_loss_rate": 0.035714829388391336,
+    "reporting_period_label": "August 2025 versus July 2025"
+  },
+  "product": "nAIM Portfolio Intelligence Workbench",
+  "pronunciation": "name",
+  "public_boundaries": {
+    "automated_credit_decision": false,
+    "external_model_call": false,
+    "mutable_administration": false,
+    "raw_account_records": false,
+    "secrets": false,
+    "trading_recommendation": false
+  },
+  "reporting_period": "2025-08-01",
+  "schema_version": "1.0.0",
+  "source_context": {
+    "configuration_hash": "236b6973fd525e6bcb27774f149f70377f5b330dd0f5b30d53eafa13a7529c44",
+    "dataset_hash": "c75f395801ea6bc13a5c6aed62a7ada853843db88bda7027c5916c9256671b1e",
+    "dataset_hash_basis": "validated-and-mart-files",
+    "dataset_profile": "default",
+    "filter_scope": {
+      "approved_reference_basket": "BASKET-001",
+      "headline_scope": "all_portfolio"
+    },
+    "metric_registry_version": "2.0.0",
+    "profile": "default",
+    "run_id": "default-73421-236b6973fd52",
+    "selection_rule": "Peak calculated annualised net loss rate in the generated history",
+    "source_inputs": [
+      {
+        "path": "exports/validation/interop_evidence_snapshot.json",
+        "publication_allowed": true,
+        "sha256": "b88421cc338b3f34551a1032d0d9e3380f94c7fd70f36a1c43d7cdc7ade4f5a0"
+      },
+      {
+        "path": "outputs/market_risk/evidence_snapshot.json",
+        "publication_allowed": true,
+        "sha256": "59092f029061b346961bdae61888f8b79f7688fc8abb6d21f37689118c03c041"
+      }
+    ],
+    "type": "validated_offline_evidence_snapshot"
+  },
+  "strategy": {
+    "approval_required": true,
+    "causal_warning": "Only randomised eligible populations support causal interpretation; all other comparisons are associational.",
+    "comparison": [
+      {
+        "customer_friction_rate": 0.361729,
+        "false_positive_rate": 0.747511,
+        "fraud_bps": 15.8649,
+        "strategy": "Champion A"
+      },
+      {
+        "customer_friction_rate": 0.389998,
+        "false_positive_rate": 0.897499,
+        "fraud_bps": 4.6854,
+        "strategy": "Challenger B"
+      }
+    ],
+    "decision": "Investigate",
+    "sample_ratio_mismatch_flag": true
+  },
+  "synthetic_data": true,
+  "synthetic_statement": "All data, names, contracts, findings, thresholds and currency values are synthetic and institution-neutral. No customer, partner, vendor or observed market fact is shown.",
+  "tagline": "Name the movement. Own the evidence.",
+  "validation": {
+    "data_quality_score": 100.0,
+    "data_quality_status": "PASS",
+    "publication_allowed": true,
+    "root_cause_reconciliation_passed": true,
+    "root_cause_reconciliation_tolerance_bps": 1e-08
+  }
+}

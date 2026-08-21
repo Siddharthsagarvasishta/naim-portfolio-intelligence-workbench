@@ -1,0 +1,49 @@
+name: naim-portfolio-intelligence-workbench
+
+services:
+  naim-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      NAIM_RANDOM_SEED: ${NAIM_RANDOM_SEED:-73421}
+      NAIM_DATASET_PROFILE: ${NAIM_DATASET_PROFILE:-default}
+      NAIM_DATA_DIR: /app/data
+      NAIM_DATA_MODE: ${NAIM_DATA_MODE:-OFFLINE_SNAPSHOT}
+      NAIM_LOG_LEVEL: ${NAIM_LOG_LEVEL:-INFO}
+      NAIM_ALLOWED_ORIGINS: ${NAIM_ALLOWED_ORIGINS:-http://localhost:3000}
+      NAIM_AUTH_MODE: ${NAIM_AUTH_MODE:-disabled}
+      NAIM_TOKEN_SECRET: ${NAIM_TOKEN_SECRET:-}
+      NAIM_TOKEN_TTL_SECONDS: ${NAIM_TOKEN_TTL_SECONDS:-3600}
+      NAIM_TOKEN_ISSUER: ${NAIM_TOKEN_ISSUER:-naim-local}
+      NAIM_TOKEN_AUDIENCE: ${NAIM_TOKEN_AUDIENCE:-naim-workbench}
+      NAIM_DATABASE_URL: ${NAIM_DATABASE_URL:-sqlite+pysqlite:////app/data/state/naim_workflow.sqlite3}
+      NAIM_OIDC_ISSUER: ${NAIM_OIDC_ISSUER:-}
+      NAIM_OIDC_AUDIENCE: ${NAIM_OIDC_AUDIENCE:-}
+      NAIM_OIDC_JWKS_URL: ${NAIM_OIDC_JWKS_URL:-}
+      NAIM_OIDC_ROLE_CLAIM: ${NAIM_OIDC_ROLE_CLAIM:-naim_role}
+    volumes:
+      - naim-data:/app/data
+      - ./exports:/app/exports
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  naim-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        NEXT_PUBLIC_NAIM_API_URL: ${NEXT_PUBLIC_NAIM_API_URL:-http://localhost:8000/api/v1}
+    environment:
+      NEXT_PUBLIC_NAIM_API_URL: ${NEXT_PUBLIC_NAIM_API_URL:-http://localhost:8000/api/v1}
+    depends_on:
+      naim-api:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  naim-data:
+    name: naim-portfolio-intelligence-workbench-data

@@ -1,0 +1,1 @@
+"""nAIM FastAPI application."""

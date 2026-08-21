@@ -1,0 +1,8 @@
+parameter_name,data_type,current_value,allowable_values,purpose
+p.Reporting Period,date,2025-08-01,Loaded reporting periods,Selected analytical period
+p.Comparison,text,Prior month,Prior month|Prior year|Scenario|Benchmark,Comparison
+p.Metric ID,text,ANNUALISED_NET_LOSS_RATE,Governed metric IDs,Measure selector
+p.Dimension,text,Acquisition channel,Approved dimensions,Dimension selector
+p.Top N,integer,5,1-25,Contribution ranking
+p.Basket Version,text,All portfolio,Approved basket versions,Population selector
+

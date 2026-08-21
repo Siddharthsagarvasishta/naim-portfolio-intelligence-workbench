@@ -1,0 +1,31 @@
+{
+  "methodology_version": "1.0.0",
+  "grade_thresholds": [
+    {"minimum": 80, "grade": "Grade 1: Strong"},
+    {"minimum": 65, "grade": "Grade 2: Stable"},
+    {"minimum": 50, "grade": "Grade 3: Watch"},
+    {"minimum": 35, "grade": "Grade 4: Weak"},
+    {"minimum": 0, "grade": "Grade 5: Critical"}
+  ],
+  "partner": {
+    "growth_score": {"weight": 0.20, "direction": "higher"},
+    "profit_score": {"weight": 0.30, "direction": "higher"},
+    "quality_score": {"weight": 0.20, "direction": "higher"},
+    "risk_score": {"weight": 0.20, "direction": "lower"},
+    "concentration_score": {"weight": 0.10, "direction": "lower"}
+  },
+  "vendor": {
+    "quality_score": {"weight": 0.25, "direction": "higher"},
+    "sla_score": {"weight": 0.20, "direction": "higher"},
+    "capacity_score": {"weight": 0.15, "direction": "higher"},
+    "cost_score": {"weight": 0.15, "direction": "lower"},
+    "risk_score": {"weight": 0.25, "direction": "lower"}
+  },
+  "membership": {
+    "profit_score": {"weight": 0.35, "direction": "higher"},
+    "engagement_score": {"weight": 0.25, "direction": "higher"},
+    "retention_score": {"weight": 0.20, "direction": "higher"},
+    "risk_score": {"weight": 0.20, "direction": "lower"}
+  }
+}
+

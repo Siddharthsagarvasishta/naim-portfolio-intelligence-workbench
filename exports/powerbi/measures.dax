@@ -1,0 +1,102 @@
+-- Snapshot-compatible measures for the CSV tables in exports/powerbi/data.
+-- Import each CSV using its filename stem as the table name.
+-- These measures read calculated evidence; they do not recreate row-level metrics.
+
+Annualised Net Loss Rate :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "ANNUALISED_NET_LOSS_RATE"
+)
+
+Annualised Net Loss Rate Prior :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[prior_value] ),
+    'kpi_snapshot'[metric_id] = "ANNUALISED_NET_LOSS_RATE"
+)
+
+Loss Rate Movement bps :=
+( [Annualised Net Loss Rate] - [Annualised Net Loss Rate Prior] ) * 10000
+
+30+ Delinquency Rate :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "DELINQUENCY_30_ACCOUNT_RATE"
+)
+
+Confirmed Fraud bps :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "FRAUD_BPS"
+)
+
+Manual Review Rate :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "MANUAL_REVIEW_RATE"
+)
+
+False Positive Rate :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "FALSE_POSITIVE_RATE"
+)
+
+Customer Friction Rate :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "CUSTOMER_FRICTION_RATE"
+)
+
+Expected Profit :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "EXPECTED_PROFIT"
+)
+
+Active Accounts :=
+CALCULATE (
+    MAX ( 'kpi_snapshot'[value] ),
+    'kpi_snapshot'[metric_id] = "ACTIVE_ACCOUNTS"
+)
+
+Selected KPI Value :=
+MAX ( 'kpi_snapshot'[value] )
+
+Selected KPI Prior :=
+MAX ( 'kpi_snapshot'[prior_value] )
+
+Selected KPI Change :=
+MAX ( 'kpi_snapshot'[absolute_change] )
+
+Selected KPI Denominator :=
+MAX ( 'kpi_snapshot'[denominator] )
+
+Strategy Expected Profit :=
+SUM ( 'strategy_snapshot'[expected_profit] )
+
+Strategy Fraud bps :=
+AVERAGE ( 'strategy_snapshot'[fraud_bps] )
+
+Strategy False Positive Rate :=
+AVERAGE ( 'strategy_snapshot'[false_positive_rate] )
+
+Entity Rating Score :=
+AVERAGE ( 'entity_rating_snapshot'[rating_score] )
+
+Entity Expected Contribution :=
+SUM ( 'entity_rating_snapshot'[expected_contribution] )
+
+Scenario Total Expected Profit :=
+SUM ( 'scenario_snapshot'[total_expected_profit] )
+
+Scenario Profit Impact :=
+SUM ( 'scenario_snapshot'[profit_delta_from_baseline] )
+
+Evidence Quality Score :=
+MAX ( 'evidence_scope'[quality_score] )
+
+Evidence Row Count :=
+MAX ( 'evidence_scope'[account_month_rows] )
+
+Evidence Publication Allowed :=
+IF ( MAX ( 'evidence_scope'[publication_allowed] ) = TRUE (), "Yes", "No" )

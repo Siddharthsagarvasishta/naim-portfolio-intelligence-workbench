@@ -1,0 +1,16 @@
+scope: backend-data-analytics
+status: implemented_and_tested_in_fast_profile
+checklist:
+  - deterministic configurable synthetic generation
+  - raw validated curated and mart layers
+  - validation gate quarantine and run manifest
+  - governed metric registry and calculation safeguards
+  - KPI vintage roll-rate strategy and root-cause analytics
+  - alerts drift scenarios and verified commentary
+  - partner vendor membership basket rating capacity and network analytics
+  - versioned FastAPI endpoints with request metadata
+  - unit integration data-quality and performance tests
+non_goals_for_this_slice:
+  - frontend implementation
+  - documentation and exported presentation packages
+  - Docker and repository-level orchestration

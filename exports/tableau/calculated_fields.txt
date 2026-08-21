@@ -1,0 +1,53 @@
+# nAIM governed Tableau calculated fields
+
+## Annualised Net Loss Rate
+(SUM([chargeoff_amount]) - SUM([recovery_amount])) / SUM([average_receivables]) * 12
+
+## Confirmed Fraud bps
+SUM([confirmed_fraud_loss]) / SUM([transaction_value]) * 10000
+
+## Manual Review Rate
+SUM([manual_review_count]) / SUM([eligible_decisions])
+
+## Customer Friction Rate
+SUM([friction_customer_flag]) / SUM([active_transacting_customer_flag])
+
+## Expected Profit
+SUM([revenue]) - SUM([funding_cost]) - SUM([operating_cost])
+- SUM([net_credit_loss]) - SUM([confirmed_fraud_loss])
+- SUM([review_cost]) - SUM([friction_cost])
+
+## Period Change
+SUM([Current Value]) - SUM([Prior Value])
+
+## Basis-Point Movement
+IF [Unit] = "rate" OR [Unit] = "annualised_rate"
+THEN (SUM([Current Value]) - SUM([Prior Value])) * 10000
+ELSEIF [Unit] = "basis_points"
+THEN SUM([Current Value]) - SUM([Prior Value])
+END
+
+## Year-over-Year Change
+SUM([Current Value]) - LOOKUP(SUM([Current Value]), -12)
+
+## Alert Status
+IF [Data Quality Status] = "FAIL" THEN "Blocked"
+ELSEIF [Current Value] >= [Critical Threshold] THEN "Critical"
+ELSEIF [Current Value] >= [Watch Threshold] THEN "Watch"
+ELSE "Stable"
+END
+
+## Rating Grade
+IF [Rating Score] >= 80 THEN "Grade 1: Strong"
+ELSEIF [Rating Score] >= 65 THEN "Grade 2: Stable"
+ELSEIF [Rating Score] >= 50 THEN "Grade 3: Watch"
+ELSEIF [Rating Score] >= 35 THEN "Grade 4: Weak"
+ELSE "Grade 5: Critical"
+END
+
+## Selected Basket Value
+IF [Basket Version] = [p.Basket Version] THEN [Metric Numerator] END
+
+## Weighted Basket Metric
+SUM([Metric Value] * [Basket Weight]) / SUM([Basket Weight])
+

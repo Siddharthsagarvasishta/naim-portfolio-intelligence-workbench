@@ -1,0 +1,1472 @@
+{
+  "schema_version": "1.1.0",
+  "registry_version": "2.0.0",
+  "product": "nAIM Portfolio Intelligence Workbench",
+  "description": "Conservative capability truth registry. A LIVE status means executable evidence and a focused test exist in this repository; it does not imply production deployment.",
+  "allowed_statuses": [
+    "LIVE",
+    "INTEGRATION_ONLY",
+    "DOCUMENTED",
+    "DISABLED",
+    "NOT_IMPLEMENTED"
+  ],
+  "status_definitions": {
+    "LIVE": "Executable in the repository with focused test evidence.",
+    "INTEGRATION_ONLY": "An interface, scaffold, or offline interoperability asset exists, but the end-to-end capability is not validated as live.",
+    "DOCUMENTED": "Method or integration intent is documented without an executable repository implementation.",
+    "DISABLED": "Executable code exists but is intentionally unavailable under the current configuration.",
+    "NOT_IMPLEMENTED": "No executable implementation is present."
+  },
+  "features": [
+    {
+      "feature_id": "CAPABILITY_STATUS_REGISTRY",
+      "name": "Capability truth registry",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/validate_feature_status.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_feature_status.py"
+      ],
+      "artifact_evidence": [
+        "docs/capability_status.md"
+      ],
+      "limitation": "The registry is machine-readable, test-validated, and exposed through the application capability surface; LIVE still means repository execution rather than external production deployment.",
+      "last_validation_date": "2026-08-01",
+      "owner": "nAIM Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "DETERMINISTIC_DATA_PIPELINE",
+      "name": "Deterministic synthetic data pipeline",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/data_generation/generator.py",
+        "src/naim_risk/pipeline.py",
+        "src/naim_risk/storage.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_pipeline_api.py",
+        "tests/integration/test_seeded_story.py"
+      ],
+      "artifact_evidence": [
+        "data/manifests/latest.json"
+      ],
+      "limitation": "The pipeline uses synthetic data and local single-node storage; it is not a production ingestion service.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Data Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "DATA_QUALITY_GATE",
+      "name": "Data validation, quarantine, and publication gate",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/data-quality"
+      ],
+      "frontend_route": [
+        "/data-quality"
+      ],
+      "calculation_module": [
+        "src/naim_risk/validation/gate.py",
+        "src/naim_risk/pipeline.py"
+      ],
+      "test_evidence": [
+        "tests/data_quality/test_validation_gate.py",
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "exports/validation/evidence_snapshot.json"
+      ],
+      "limitation": "Rules validate the repository's canonical synthetic contracts and are not a substitute for source-specific production controls.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Data Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "CORE_PORTFOLIO_ANALYTICS",
+      "name": "Governed portfolio KPIs and trends",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/command-centre",
+        "/api/v1/kpis",
+        "/api/v1/trends"
+      ],
+      "frontend_route": [
+        "/",
+        "/portfolio-trends"
+      ],
+      "calculation_module": [
+        "src/naim_risk/metrics/core.py",
+        "src/naim_risk/service.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_metrics.py",
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "exports/validation/evidence_snapshot.json"
+      ],
+      "limitation": "Metrics are calculated on synthetic portfolio data and are not accounting, regulatory, or customer-decision outputs.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Portfolio Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "VINTAGE_ROLL_RATE_ANALYTICS",
+      "name": "Vintage and delinquency-transition analytics",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/vintages",
+        "/api/v1/roll-rates"
+      ],
+      "frontend_route": [
+        "/vintage"
+      ],
+      "calculation_module": [
+        "src/naim_risk/vintage/analysis.py",
+        "src/naim_risk/metrics/core.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_vintages.py",
+        "tests/unit/test_metrics.py"
+      ],
+      "artifact_evidence": [
+        "docs/analytical_methodology.md"
+      ],
+      "limitation": "Immature vintages and small transition populations require the emitted maturity and denominator cautions.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Credit Risk Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "STRATEGY_COMPARISON",
+      "name": "Champion and challenger strategy comparison",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/strategy-comparison"
+      ],
+      "frontend_route": [
+        "/strategy"
+      ],
+      "calculation_module": [
+        "src/naim_risk/strategies/comparison.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_seeded_story.py",
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "exports/validation/interop_evidence_snapshot.json"
+      ],
+      "limitation": "Only explicitly randomised eligible populations support causal interpretation; other comparisons remain associational.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Strategy Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "ROOT_CAUSE_DECOMPOSITION",
+      "name": "Exact mix and within-segment decomposition",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/root-cause"
+      ],
+      "frontend_route": [
+        "/root-cause"
+      ],
+      "calculation_module": [
+        "src/naim_risk/root_cause/decomposition.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_decomposition.py",
+        "tests/integration/test_seeded_story.py"
+      ],
+      "artifact_evidence": [
+        "exports/validation/interop_reconciliation_totals.csv"
+      ],
+      "limitation": "The additive bridge attributes measured movement but does not establish causality.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Portfolio Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "ALERT_RULE_EVALUATION",
+      "name": "Deterministic alert-rule evaluation",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/alerts"
+      ],
+      "frontend_route": [
+        "/alerts"
+      ],
+      "calculation_module": [
+        "src/naim_risk/alerts/engine.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_commentary_alerts_scenarios.py"
+      ],
+      "artifact_evidence": [
+        "config/alert_rules.json"
+      ],
+      "limitation": "Threshold and persistence rules execute, but durable cooldown, cross-run deduplication, parent-child suppression, and SLA state do not.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Risk Monitoring",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "POINT_IN_TIME_ANALYTICS",
+      "name": "Point-in-time bounded analytical views",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/command-centre",
+        "/api/v1/root-cause",
+        "/api/v1/vintages",
+        "/api/v1/strategy-comparison",
+        "/api/v1/finance"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/service.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/analytical_methodology.md"
+      ],
+      "limitation": "Analytical facts are period-bounded, while mutable basket and investigation state is explicitly current-state rather than historically reconstructed.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Model Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "STATISTICAL_SEGMENTATION",
+      "name": "K-Means segmentation with a tree surrogate",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/segments"
+      ],
+      "frontend_route": [
+        "/segmentation"
+      ],
+      "calculation_module": [
+        "src/naim_risk/segmentation/statistical.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_statistical_segmentation.py"
+      ],
+      "artifact_evidence": [
+        "models/model_registry.json"
+      ],
+      "limitation": "This is descriptive synthetic segmentation; the surrogate approximates cluster membership and is not a causal or credit-decision model.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Data Science",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "SCENARIO_FORECASTING",
+      "name": "Transparent conditional scenario projections",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/scenarios",
+        "/api/v1/scenarios/run"
+      ],
+      "frontend_route": [
+        "/forecast"
+      ],
+      "calculation_module": [
+        "src/naim_risk/forecasting/scenarios.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_commentary_alerts_scenarios.py",
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "config/economic_scenarios.json"
+      ],
+      "limitation": "Outputs are assumption-driven planning estimates, not regulatory stress tests or official expected-credit-loss calculations.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Scenario Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "CROSS_DOMAIN_ENTITY_ANALYTICS",
+      "name": "Partner, vendor, membership, benefit, and rating analytics",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/partners",
+        "/api/v1/vendors",
+        "/api/v1/memberships",
+        "/api/v1/benefits",
+        "/api/v1/ratings"
+      ],
+      "frontend_route": [
+        "/partners",
+        "/vendors",
+        "/membership"
+      ],
+      "calculation_module": [
+        "src/naim_risk/cross_domain/analytics.py",
+        "src/naim_risk/ratings/engine.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_cross_domain.py",
+        "tests/unit/test_baskets_ratings.py"
+      ],
+      "artifact_evidence": [
+        "config/rating_methodologies.json"
+      ],
+      "limitation": "Ratings and economics are synthetic prioritisation aids and not external agency ratings or contractual decisions.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Entity Risk Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "FINANCE_NETWORK_CAPACITY_ANALYTICS",
+      "name": "Financial bridge, dependency-network, and capacity analysis",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/finance",
+        "/api/v1/network",
+        "/api/v1/capacity"
+      ],
+      "frontend_route": [
+        "/finance"
+      ],
+      "calculation_module": [
+        "src/naim_risk/cross_domain/analytics.py",
+        "src/naim_risk/network/analysis.py",
+        "src/naim_risk/capacity/analysis.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_cross_domain.py"
+      ],
+      "artifact_evidence": [
+        "docs/network_dependency_methodology.md",
+        "docs/operations_capacity_methodology.md"
+      ],
+      "limitation": "Network and operational scenarios simplify contractual, legal, substitution, and queueing constraints.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Finance and Operations Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "BASIC_BASKET_WORKSPACE_RUNTIME",
+      "name": "Durable baskets, workspaces, investigations, and analysis runs",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/baskets",
+        "/api/v1/workspaces",
+        "/api/v1/investigations",
+        "/api/v1/analysis-templates/run"
+      ],
+      "frontend_route": [
+        "/baskets",
+        "/investigations"
+      ],
+      "calculation_module": [
+        "src/naim_risk/baskets/engine.py",
+        "src/naim_risk/service.py",
+        "src/naim_risk/workflow/store.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_extended_api.py",
+        "tests/integration/test_service_workflow_persistence.py",
+        "tests/unit/test_baskets_ratings.py"
+      ],
+      "artifact_evidence": [
+        "models/analysis_template_registry.json"
+      ],
+      "limitation": "Workflow objects persist through SQLAlchemy with optimistic versioning, soft deletion, approvals, and audit history; multi-node contention and managed PostgreSQL operations remain externally unvalidated.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Workbench Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "DETERMINISTIC_COMMENTARY_PROVIDER",
+      "name": "Deterministic evidence-bounded commentary",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/commentary/generate"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/commentary/providers.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_commentary_alerts_scenarios.py",
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/analytical_methodology.md"
+      ],
+      "limitation": "Commentary is deterministic, local, draft-only, and requires human review; it is not an external generative-AI integration.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Insight Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "WEB_WORKBENCH",
+      "name": "Responsive analytical web workbench",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [
+        "/",
+        "/root-cause",
+        "/vintage",
+        "/strategy",
+        "/alerts",
+        "/instant-demo"
+      ],
+      "calculation_module": [
+        "app/workbench.tsx",
+        "app/components/pages.tsx",
+        "app/data/api-client.ts"
+      ],
+      "test_evidence": [
+        "tests/rendered-html.test.mjs"
+      ],
+      "artifact_evidence": [
+        "app/globals.css"
+      ],
+      "limitation": "Rendered-route tests cover representative routes; full browser, accessibility, and strict live-mode regression coverage remains incomplete.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Frontend Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "EXCEL_EXPORT_SERVICE",
+      "name": "API-generated Excel evidence export",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/exports/excel",
+        "/api/v1/exports/{artifact_id}/download"
+      ],
+      "frontend_route": [
+        "/exports"
+      ],
+      "calculation_module": [
+        "src/naim_risk/exports/packages.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "exports/validation/workbook_validation.json"
+      ],
+      "limitation": "The API workbook is an aggregated synthetic evidence export with durable registration, expiry, authorization, SHA-256 verification and download audit; generation remains synchronous.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reporting Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "API_SAFETY_BASELINE",
+      "name": "Typed input and bounded output safety controls",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/api.py",
+        "src/naim_risk/baskets/engine.py",
+        "src/naim_risk/exports/packages.py",
+        "src/naim_risk/security.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_baskets_ratings.py",
+        "tests/unit/test_security_controls.py",
+        "tests/integration/test_pipeline_api.py",
+        "tests/integration/test_security_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/security_and_privacy.md"
+      ],
+      "limitation": "Typed requests, bounded fields/bodies, explicit CORS, request IDs, rate limits, security headers, safe expressions, output neutralisation and scoped expiring downloads execute; infrastructure and adversarial penetration testing remain external.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Application Security",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "PIPELINE_PROVENANCE",
+      "name": "Pipeline run manifest and configuration provenance",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/metadata",
+        "/api/v1/data-quality"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/pipeline.py",
+        "src/naim_risk/config.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_pipeline_api.py"
+      ],
+      "artifact_evidence": [
+        "data/manifests/latest.json"
+      ],
+      "limitation": "Run-level provenance exists for the analytical pipeline, but equivalent manifests are not yet created for every generated artifact.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Data Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "PERFORMANCE_BENCHMARKING",
+      "name": "Backend response-time benchmark harness",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/benchmark_backend.py"
+      ],
+      "test_evidence": [
+        "tests/performance/test_api_performance.py"
+      ],
+      "artifact_evidence": [
+        "work/benchmark-data/benchmarks/backend-test.json"
+      ],
+      "limitation": "The harness covers a bounded local analytical profile and does not establish production concurrency or infrastructure capacity.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Performance Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "LOCAL_NON_DOCKER_DEPLOYMENT",
+      "name": "Local API and web startup path",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/health"
+      ],
+      "frontend_route": [
+        "/"
+      ],
+      "calculation_module": [
+        "scripts/check_environment.py",
+        "src/naim_risk/api.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_pipeline_api.py",
+        "tests/rendered-html.test.mjs"
+      ],
+      "artifact_evidence": [
+        ".env.example"
+      ],
+      "limitation": "Startup requires running from the repository root with supported Python and Node versions; environment setup is not automatic outside the task runner.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Developer Experience",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "STRICT_DATA_SOURCE_MODES",
+      "name": "Strict LIVE, DEMO, OFFLINE_SNAPSHOT, and UNAVAILABLE modes",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/data-source",
+        "/api/v1/capabilities"
+      ],
+      "frontend_route": [
+        "/capabilities"
+      ],
+      "calculation_module": [
+        "src/naim_risk/runtime_modes.py",
+        "src/naim_risk/capabilities.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_runtime_modes.py",
+        "tests/integration/test_auth_data_mode_api.py",
+        "tests/frontend-data-contract.test.mjs"
+      ],
+      "artifact_evidence": [
+        "docs/capability_status.md"
+      ],
+      "limitation": "Modes are explicit and fail closed without live evidence; OFFLINE_SNAPSHOT accuracy still depends on an approved, checksum-verified snapshot supplied by the operator.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Workbench Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "WORKFLOW_STATE_PERSISTENCE",
+      "name": "Durable mutable workflow state",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/investigations",
+        "/api/v1/baskets",
+        "/api/v1/workspaces",
+        "/api/v1/analysis-runs/{run_id}",
+        "/api/v1/exports"
+      ],
+      "frontend_route": [
+        "/baskets",
+        "/investigations"
+      ],
+      "calculation_module": [
+        "src/naim_risk/workflow/models.py",
+        "src/naim_risk/workflow/store.py",
+        "src/naim_risk/service.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_workflow_persistence.py",
+        "tests/integration/test_service_workflow_persistence.py"
+      ],
+      "artifact_evidence": [
+        "docs/workflow_persistence.md"
+      ],
+      "limitation": "SQLite restart persistence, history, soft deletion, approvals, and optimistic version checks are validated; PostgreSQL wiring exists but no managed multi-node deployment was exercised here.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Platform Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "AUTH_DISABLED_MODE",
+      "name": "Explicit local-development authentication-disabled mode",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/auth/status",
+        "/api/v1/auth/me"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/auth/service.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_auth.py",
+        "tests/integration/test_auth_data_mode_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/authentication.md"
+      ],
+      "limitation": "AUTH_MODE=disabled is deliberately limited to local development, is visibly disclosed, and must not be used as a production identity control.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Identity Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "AUTH_DEMO_MODE",
+      "name": "Token-based demonstration authentication",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/auth/login",
+        "/api/v1/auth/logout",
+        "/api/v1/auth/me"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/auth/service.py",
+        "src/naim_risk/workflow/store.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_auth.py",
+        "tests/unit/test_cli_auth_db.py",
+        "tests/integration/test_auth_data_mode_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/authentication.md"
+      ],
+      "limitation": "Demo accounts use Argon2 passwords, expiring signed tokens, and durable revocation; this is a demonstration identity system, not enterprise federation.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Identity Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "BACKEND_ROLE_ENFORCEMENT",
+      "name": "Endpoint-level role-based access control",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/investigations",
+        "/api/v1/workspaces",
+        "/api/v1/exports",
+        "/api/v1/presentations/generate",
+        "/api/v1/tableau/extract"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/auth/service.py",
+        "src/naim_risk/api.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_auth.py",
+        "tests/integration/test_auth_data_mode_api.py",
+        "tests/integration/test_security_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/authentication.md"
+      ],
+      "limitation": "Backend permissions and protected downloads are enforced for the repository's governed roles; external directory group mapping is not validated.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Identity Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "OIDC_AUTHENTICATION",
+      "name": "OIDC authentication adapter",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/auth/service.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_auth.py"
+      ],
+      "artifact_evidence": [
+        "docs/authentication.md"
+      ],
+      "limitation": "An OIDC claim-validation adapter and configuration contract exist, but no real identity provider, discovery endpoint, key rotation, or group mapping was exercised.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Identity Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "DATA_ONBOARDING_STUDIO",
+      "name": "Local data onboarding studio",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/data-onboarding/sources/upload",
+        "/api/v1/data-onboarding/preview",
+        "/api/v1/data-onboarding/map",
+        "/api/v1/data-onboarding/validate",
+        "/api/v1/data-onboarding/load"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/onboarding.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_onboarding.py",
+        "tests/integration/test_onboarding_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/data_onboarding_guide.md"
+      ],
+      "limitation": "CSV, XLSX, Parquet, JSON, SQLite and DuckDB onboarding is validated with bounded uploads, safe mapping, quarantine, reconciliation and approvals; optional PostgreSQL source execution is not externally validated.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Data Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "PORTFOLIO_COMPOSITION_OPTIMISER",
+      "name": "Constrained portfolio composition optimiser",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/composition-scenarios/run",
+        "/api/v1/optimisation/run"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/optimisation.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_optimisation.py",
+        "tests/integration/test_optimisation_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/portfolio_composition_simulator.md"
+      ],
+      "limitation": "A deterministic linear-programming optimiser reports feasibility, binding constraints and sensitivities across governed objectives; nonlinear and stochastic optimisation are outside this implementation.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Decision Science",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "LIVE_PRESENTATION_GENERATION",
+      "name": "Workspace-driven live presentation generation",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/presentations/generate",
+        "/api/v1/presentations/{presentation_id}"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/presentations.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_presentations.py"
+      ],
+      "artifact_evidence": [
+        "docs/presentation_export_guide.md"
+      ],
+      "limitation": "Editable, evidence-linked 16:9 PowerPoint generation, durable job metadata, validation and protected download are executable; external slide-host publication is not included.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reporting Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "MARKET_RISK_VOLATILITY_LAB",
+      "name": "Market Risk and Volatility Lab",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/market-risk/status",
+        "/api/v1/market-risk/run",
+        "/api/v1/market-risk/export"
+      ],
+      "frontend_route": [
+        "/market-risk"
+      ],
+      "calculation_module": [
+        "src/naim_risk/market_risk/providers.py",
+        "src/naim_risk/market_risk/analytics.py",
+        "src/naim_risk/market_risk/exports.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_market_risk_extensions.py",
+        "tests/integration/test_quant_extensions_api.py",
+        "tests/frontend-data-contract.test.mjs"
+      ],
+      "artifact_evidence": [
+        "docs/market_risk_methodology.md",
+        "outputs/market_risk/evidence_snapshot.json"
+      ],
+      "limitation": "Deterministic and uploaded-series providers, volatility diagnostics, GARCH-family estimates, implied-volatility input, VaR/ES and backtests are validated; external feeds are configuration-only and no trading recommendation is produced.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Quantitative Research",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "SURVIVAL_ANALYSIS",
+      "name": "Kaplan-Meier and time-to-event analysis",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/advanced-statistics/survival"
+      ],
+      "frontend_route": [
+        "/advanced-statistics"
+      ],
+      "calculation_module": [
+        "src/naim_risk/advanced/survival.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_advanced_statistics_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/advanced_statistics_methodology.md"
+      ],
+      "limitation": "Kaplan-Meier curves, censoring and log-rank comparisons are executable; Cox proportional-hazards regression is not implemented.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Quantitative Research",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "SHAP_DELINQUENCY_DIAGNOSTICS",
+      "name": "SHAP-supported next-month delinquency diagnostics",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [
+        "/api/v1/advanced-statistics/behavioural"
+      ],
+      "frontend_route": [
+        "/advanced-statistics"
+      ],
+      "calculation_module": [
+        "src/naim_risk/advanced/behavioural.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_advanced_statistics_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/advanced_statistics_methodology.md"
+      ],
+      "limitation": "Calibrated behavioural models and perturbation contributions execute, but the optional SHAP dependency is unavailable in this environment and fallback contributions are explicitly not labelled SHAP.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Model Development",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "CHANGE_POINT_DETECTION",
+      "name": "Robust structural change-point detection",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/advanced-statistics/change-points"
+      ],
+      "frontend_route": [
+        "/advanced-statistics"
+      ],
+      "calculation_module": [
+        "src/naim_risk/advanced/changepoint.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_advanced_statistics_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/advanced_statistics_methodology.md"
+      ],
+      "limitation": "A robust single-break detector with bootstrap stability diagnostics executes; multi-break Bayesian and online detectors are outside scope.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Quantitative Research",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "PROPENSITY_WEIGHTED_COMPARISON",
+      "name": "Propensity-weighted observational comparison",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/advanced-statistics/propensity"
+      ],
+      "frontend_route": [
+        "/advanced-statistics"
+      ],
+      "calculation_module": [
+        "src/naim_risk/advanced/causal.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_advanced_statistics_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/advanced_statistics_methodology.md"
+      ],
+      "limitation": "Propensity weighting, overlap, trimming, balance and effective-sample diagnostics execute; results remain observational and do not establish causality.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Causal Analytics",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "DIFFERENCE_IN_DIFFERENCES",
+      "name": "Synthetic-policy difference-in-differences analysis",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/advanced-statistics/difference-in-differences"
+      ],
+      "frontend_route": [
+        "/advanced-statistics"
+      ],
+      "calculation_module": [
+        "src/naim_risk/advanced/causal.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_advanced_statistics_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/advanced_statistics_methodology.md"
+      ],
+      "limitation": "A synthetic-policy difference-in-differences workflow with diagnostics executes; outputs remain associational unless design assumptions are externally established.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Causal Analytics",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "LEARNING_PROFESSIONAL_MODES",
+      "name": "Learning and professional analytical modes",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "The baseline has audience-oriented display modes, but not the required paired learning and professional content with knowledge checks and calculation traces across all specified methods.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Product Education",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "GOVERNED_INSIGHT_COMPOSER",
+      "name": "Structured governed Insight Composer",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "Deterministic commentary exists, but the required structured insight types, evidence schema, contradiction detection, and investigation sequencing are not implemented as a composer.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Insight Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "CUSTOM_METRIC_BUILDER",
+      "name": "Governed custom metric and analysis builder",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "There is no user-authored metric workflow, restricted calculation language, fixture comparison, impact analysis, versioning, or approval service.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Metric Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "REPRODUCIBILITY_PACKS",
+      "name": "User-generated reproducibility packs",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [
+        "/api/v1/market-risk/export"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/market_risk/exports.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_market_risk_extensions.py",
+        "tests/integration/test_quant_extensions_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/market_risk_methodology.md"
+      ],
+      "limitation": "The Market Risk Lab produces a governed reproducibility bundle, but a workspace-general pack spanning queries, charts, commentary and every analysis family is not implemented.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reproducibility Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "EXPORT_JOB_FRAMEWORK",
+      "name": "Persistent asynchronous export-job framework",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [
+        "/api/v1/exports",
+        "/api/v1/exports/{artifact_id}/download"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/service.py",
+        "src/naim_risk/security.py",
+        "src/naim_risk/workflow/store.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_service_workflow_persistence.py",
+        "tests/integration/test_security_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/workflow_persistence.md"
+      ],
+      "limitation": "Persistent job metadata, authorization, expiry, download counts, errors, hash verification and audit history execute, but work remains synchronous with no queue, cancellation or background worker.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reporting Platform",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "TABLEAU_STATIC_PACKAGE",
+      "name": "Tableau source and build-guidance package",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "exports/tableau/README.md",
+        "exports/tableau/calculated_fields.txt",
+        "exports/tableau/relationships.csv"
+      ],
+      "limitation": "Static source files, calculations, relationships and build guidance are present; Tableau Desktop/Cloud publication is not authenticated or validated.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Business Intelligence Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "TABLEAU_HYPER_EXTRACT",
+      "name": "Validated Tableau Hyper extract",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/tableau/extract",
+        "/api/v1/tableau/extract/download",
+        "/api/v1/tableau/extract/manifest"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/tableau.py"
+      ],
+      "test_evidence": [
+        "tests/integration/test_tableau_hyper.py"
+      ],
+      "artifact_evidence": [
+        "docs/tableau_setup.md"
+      ],
+      "limitation": "The official Hyper API creates, reopens and queries the native extract with control-total validation and protected download; authenticated Tableau Server/Cloud publication remains disabled.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Business Intelligence Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "POWER_BI_SOURCE_PACKAGE",
+      "name": "Power BI source-control enablement package",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/powerbi_project.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_powerbi_project.py"
+      ],
+      "artifact_evidence": [
+        "outputs/powerbi/nAIM.PowerBIProject/nAIM.pbip",
+        "outputs/powerbi/nAIM.PowerBIProject/Build/project-manifest.json",
+        "docs/powerbi_setup.md"
+      ],
+      "limitation": "A statically validated PBIP/PBIR/TMDL source project, semantic model, relationships, measures, pages and theme exist; Power BI Desktop open/save and PBIX/PBIT output were not available for validation.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Business Intelligence Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "POWER_BI_PUBLISHING",
+      "name": "Authenticated Power BI publication",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/powerbi_project.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_powerbi_project.py"
+      ],
+      "artifact_evidence": [
+        "docs/powerbi_setup.md"
+      ],
+      "limitation": "The package defines a disabled publisher boundary and deployment checklist; no credentialed workspace, tenant or successful Power BI publication was available.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Business Intelligence Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "SAS_INTEROPERABILITY_PACKAGE",
+      "name": "Base SAS interoperability source package",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "exports/sas/README.md",
+        "exports/sas/02_validate_metrics.sas"
+      ],
+      "limitation": "The source package is labelled unexecuted because a SAS runtime was unavailable; no successful SAS log or generated analytical result is claimed.",
+      "last_validation_date": "2026-07-29",
+      "owner": "Statistical Interoperability",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "STREAMLIT_COMPANION",
+      "name": "Restricted Streamlit public companion",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "apps/streamlit_demo/app_core.py",
+        "apps/streamlit_demo/streamlit_app.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_public_showcase.py"
+      ],
+      "artifact_evidence": [
+        "apps/streamlit_demo/README.md",
+        "apps/streamlit_demo/evidence/public_evidence_snapshot.json"
+      ],
+      "limitation": "The restricted companion executes locally in API or checksum-verified snapshot mode and fails closed; no hosted Streamlit deployment was authenticated or observed.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Public Demo Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "STATIC_SHARE_SITE",
+      "name": "Backend-independent static share site",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/build_share_site.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_public_showcase.py"
+      ],
+      "artifact_evidence": [
+        "outputs/share_site/index.html",
+        "outputs/share_site/validation.json"
+      ],
+      "limitation": "A portable backend-free site is generated from reduced approved evidence and passes local link/safety validation; external hosting is not claimed.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Public Demo Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "LINKEDIN_SHOWCASE_PACKAGE",
+      "name": "LinkedIn showcase package",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [
+        "tests/unit/test_public_showcase.py"
+      ],
+      "artifact_evidence": [
+        "outputs/linkedin/package-manifest.json",
+        "outputs/linkedin/accessibility-and-disclosure.md",
+        "outputs/linkedin/project-summary.md"
+      ],
+      "limitation": "A reconciled written showcase, accessibility disclosure and metadata package exist; the editable carousel, carousel PDF and screen recording are not yet validated.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Showcase Production",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "PUBLIC_DEMO_PROFILE",
+      "name": "Restricted public deployment profile",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "apps/streamlit_demo/app_core.py",
+        "scripts/build_share_site.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_public_showcase.py"
+      ],
+      "artifact_evidence": [
+        "docs/public_showcase.md",
+        "outputs/share_site/validation.json"
+      ],
+      "limitation": "Reduced synthetic-only read-only public surfaces and checksum gates are implemented locally; no external public deployment, WAF, hosted rate limit or penetration test was exercised.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Platform Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "DOCKER_LOCAL_DEPLOYMENT",
+      "name": "Docker local deployment",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "docker-compose.yml",
+        "Dockerfile.api",
+        "Dockerfile.web",
+        ".github/workflows/ci.yml"
+      ],
+      "limitation": "Container definitions and a CI build step exist, but no successful local container startup was recorded in the baseline environment.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Platform Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "PRODUCTION_STYLE_DEPLOYMENT",
+      "name": "Production-style deployment profile",
+      "status": "DOCUMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "docs/architecture.md",
+        "docs/security_and_privacy.md"
+      ],
+      "limitation": "PostgreSQL and OIDC adapters, migrations and secure application controls are documented, but managed infrastructure, persistent object storage, reverse proxy, TLS, secret rotation and deployment evidence remain external.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Platform Engineering",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "WORKSPACE_DRIVEN_OUTPUT_BUILDER",
+      "name": "Workspace-driven multi-format output builder",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "A workspace can run basic analytics and request an Excel export, but it cannot generate and version the full dashboard, evidence, Office, BI, SAS, notebook, social, static, commentary, and investigation output set.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Workbench Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "GOVERNED_DASHBOARD_BUILDER",
+      "name": "Governed drag-and-drop dashboard builder",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "The web workbench uses fixed analytical pages; drag, resize, save, clone, linked filters, evidence mapping, and invalid-visual prevention are not implemented as a builder.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Frontend Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "CONTROLLED_ANALYSIS_QUERY",
+      "name": "Controlled natural-language analysis query interface",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "Executable analysis templates exist, but there is no approved question-to-template matcher, unsupported-question response, or governed query interface.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Insight Engineering",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "EXTERNAL_GENAI_PROVIDER",
+      "name": "Controlled external generative-AI provider adapters",
+      "status": "DOCUMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "docs/api_guide.md",
+        "docs/security_and_privacy.md"
+      ],
+      "limitation": "No external provider, key handling, schema validation, rate limiting, retry, numerical verification audit, redaction, or provider test is implemented.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Insight Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "API_CONTRACT_GENERATION",
+      "name": "Generated frontend types from the backend schema",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/generate_openapi.py",
+        "scripts/generate_frontend_api_types.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_openapi_contract.py",
+        "tests/unit/test_frontend_api_contract.py"
+      ],
+      "artifact_evidence": [
+        "outputs/contracts/openapi.json",
+        "outputs/contracts/openapi_validation.json",
+        "app/generated-api-types.ts"
+      ],
+      "limitation": "Backend OpenAPI and strict TypeScript contracts are generated deterministically with drift gates; runtime client behaviour still requires integration tests in addition to schema conformance.",
+      "last_validation_date": "2026-08-01",
+      "owner": "API Engineering",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "ADVANCED_FINANCIAL_SCENARIOS",
+      "name": "Advanced valuation and probability-weighted financial scenarios",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "Partner NPV, vendor switching cost, programme break-even, membership lifetime value, probability weighting, profit-at-risk, and the specified sensitivity suite are absent.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Finance Analytics",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "ANALYTICAL_METHOD_COMPARISON_BOARD",
+      "name": "Analytical Method Comparison Board",
+      "status": "NOT_IMPLEMENTED",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [],
+      "test_evidence": [],
+      "artifact_evidence": [],
+      "limitation": "Individual methods are documented or executable, but there is no governed board comparing assumptions, performance, stability, interpretability, latency, cost, failure modes, and approved use.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Model Governance",
+      "version": "1.0.0"
+    },
+    {
+      "feature_id": "FULL_ARTIFACT_PROVENANCE",
+      "name": "Per-artifact manifests and cross-channel provenance",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/generate_artifact_manifests.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_artifact_manifests.py"
+      ],
+      "artifact_evidence": [
+        "docs/artifact_provenance.md"
+      ],
+      "limitation": "Deterministic hashes and source metadata cover generated artifacts and release manifests, but external publication receipts and every vendor-generated derivative cannot be asserted locally.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reporting Governance",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "CROSS_ARTIFACT_RECONCILIATION",
+      "name": "Cross-artifact numerical reconciliation",
+      "status": "INTEGRATION_ONLY",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/interop_evidence_export.py",
+        "scripts/interop_flatten_exports.py"
+      ],
+      "test_evidence": [],
+      "artifact_evidence": [
+        "exports/validation/interop_evidence_snapshot.json",
+        "exports/validation/interop_reconciliation_totals.csv",
+        "exports/validation/workbook_validation.json",
+        "exports/validation/deck_validation.json"
+      ],
+      "limitation": "The legacy selected Office and interoperability snapshots reconcile; the final release gate is rerun after all nAIM artifacts and public channels are generated, and missing channels fail closed.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Reporting Governance",
+      "version": "1.1.0"
+    },
+    {
+      "feature_id": "SECURITY_HARDENING",
+      "name": "Comprehensive application security hardening",
+      "status": "LIVE",
+      "backend_endpoint": [
+        "/api/v1/auth/status",
+        "/api/v1/exports/{artifact_id}/download"
+      ],
+      "frontend_route": [],
+      "calculation_module": [
+        "src/naim_risk/security.py",
+        "src/naim_risk/auth/service.py",
+        "src/naim_risk/workflow/store.py",
+        "scripts/security_scan.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_security_controls.py",
+        "tests/integration/test_security_api.py",
+        "tests/integration/test_service_workflow_persistence.py",
+        "tests/unit/test_security_release_audit.py",
+        "tests/integration/test_security_release_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/threat_model.md",
+        "docs/security_test_results.md"
+      ],
+      "limitation": "Application-layer controls and repeatable repository scans are validated, including tamper-evident audit history and artifact hash checks; no external penetration test, managed WAF, production TLS termination or third-party SAST attestation is claimed.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Application Security",
+      "version": "2.0.0"
+    },
+    {
+      "feature_id": "THREAT_MODEL",
+      "name": "Repository threat model and security test report",
+      "status": "LIVE",
+      "backend_endpoint": [],
+      "frontend_route": [],
+      "calculation_module": [
+        "scripts/security_scan.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_security_release_audit.py",
+        "tests/integration/test_security_release_api.py"
+      ],
+      "artifact_evidence": [
+        "docs/threat_model.md",
+        "docs/security_test_results.md"
+      ],
+      "limitation": "The required threats, mitigations, executed checks and residual risks are documented and tested at repository level; the model must be revisited for each real hosting, identity and data-vendor environment.",
+      "last_validation_date": "2026-08-01",
+      "owner": "Application Security",
+      "version": "2.0.0"
+    }
+  ]
+}

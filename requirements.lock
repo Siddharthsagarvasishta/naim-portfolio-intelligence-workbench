@@ -1,0 +1,23 @@
+# Direct runtime and test dependencies resolved for Python 3.12.
+# Transitive packages are resolved by pip from these exact top-level versions.
+fastapi==0.141.0
+uvicorn[standard]==0.52.0
+pydantic==2.13.4
+numpy==2.5.1
+pandas==2.3.3
+pyarrow==19.0.1
+duckdb==1.5.5
+scipy==1.18.0
+openpyxl==3.1.5
+python-dotenv==1.2.2
+SQLAlchemy==2.0.51
+alembic==1.18.5
+argon2-cffi==25.1.0
+PyJWT[crypto]==2.13.0
+scikit-learn==1.9.0
+statsmodels==0.14.6
+httpx==0.28.1
+pytest==8.4.2
+pytest-cov==6.3.0
+hypothesis==6.163.0
+ruff==0.16.0

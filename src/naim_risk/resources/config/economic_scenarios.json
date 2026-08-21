@@ -1,0 +1,79 @@
+{
+  "assumption_version": "1.0.0",
+  "synthetic_scenario_notice": "Portfolio-planning assumptions only; not a regulatory capital scenario.",
+  "scenarios": {
+    "Baseline": {
+      "unemployment_rate": 0.052,
+      "interest_rate": 0.045,
+      "inflation_rate": 0.028,
+      "gdp_growth_rate": 0.018,
+      "consumer_stress_index": 1.0,
+      "fraud_pressure_index": 1.0,
+      "funding_cost_rate": 0.0038,
+      "operating_cost_per_active_account": 7.5,
+      "review_cost_per_case": 4.25,
+      "customer_friction_cost_per_event": 2.75,
+      "revenue_rate": 0.017,
+      "transaction_revenue_rate": 0.007,
+      "credit_loss_multiplier": 1.0,
+      "fraud_loss_multiplier": 1.0
+    },
+    "Mild Downturn": {
+      "unemployment_rate": 0.066,
+      "interest_rate": 0.052,
+      "inflation_rate": 0.034,
+      "gdp_growth_rate": 0.004,
+      "consumer_stress_index": 1.18,
+      "fraud_pressure_index": 1.08,
+      "funding_cost_rate": 0.0046,
+      "operating_cost_per_active_account": 7.8,
+      "review_cost_per_case": 4.4,
+      "customer_friction_cost_per_event": 2.9,
+      "revenue_rate": 0.0165,
+      "transaction_revenue_rate": 0.0068,
+      "credit_loss_multiplier": 1.25,
+      "fraud_loss_multiplier": 1.1
+    },
+    "Severe Downturn": {
+      "unemployment_rate": 0.092,
+      "interest_rate": 0.061,
+      "inflation_rate": 0.045,
+      "gdp_growth_rate": -0.021,
+      "consumer_stress_index": 1.55,
+      "fraud_pressure_index": 1.25,
+      "funding_cost_rate": 0.0058,
+      "operating_cost_per_active_account": 8.2,
+      "review_cost_per_case": 4.8,
+      "customer_friction_cost_per_event": 3.25,
+      "revenue_rate": 0.015,
+      "transaction_revenue_rate": 0.0062,
+      "credit_loss_multiplier": 1.72,
+      "fraud_loss_multiplier": 1.35
+    },
+    "Fraud Shock": {
+      "unemployment_rate": 0.055,
+      "interest_rate": 0.046,
+      "inflation_rate": 0.029,
+      "gdp_growth_rate": 0.014,
+      "consumer_stress_index": 1.03,
+      "fraud_pressure_index": 1.85,
+      "funding_cost_rate": 0.0039,
+      "operating_cost_per_active_account": 7.7,
+      "review_cost_per_case": 4.6,
+      "customer_friction_cost_per_event": 3.0,
+      "revenue_rate": 0.0168,
+      "transaction_revenue_rate": 0.0068,
+      "credit_loss_multiplier": 1.06,
+      "fraud_loss_multiplier": 1.9
+    }
+  },
+  "elasticities": {
+    "delinquency_to_consumer_stress": 0.55,
+    "loss_to_unemployment_delta": 4.0,
+    "fraud_to_pressure": 0.82,
+    "balance_growth_to_gdp": 0.35,
+    "review_to_fraud_pressure": 0.58,
+    "friction_to_review_growth": 0.32
+  }
+}
+

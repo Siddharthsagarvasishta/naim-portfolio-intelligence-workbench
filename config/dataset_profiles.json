@@ -1,0 +1,42 @@
+{
+  "default_seed": 73421,
+  "start_month": "2024-01-01",
+  "dataset_profiles": {
+    "test": {
+      "accounts": 320,
+      "months": 8,
+      "description": "Fast deterministic profile for unit and integration checks"
+    },
+    "small": {
+      "accounts": 10000,
+      "months": 18,
+      "description": "Developer demo profile"
+    },
+    "default": {
+      "accounts": 25000,
+      "months": 24,
+      "description": "Portfolio profile targeting approximately 500k-600k account-month rows"
+    },
+    "medium": {
+      "accounts": 50000,
+      "months": 24,
+      "description": "Expanded local analytical profile"
+    },
+    "large": {
+      "accounts": 100000,
+      "months": 24,
+      "description": "Performance and scalability profile"
+    }
+  },
+  "synthetic_label": "Synthetic, institution-neutral demonstration data",
+  "deterioration": {
+    "expansion_start_month_index": 8,
+    "expansion_end_month_index": 12,
+    "weak_mob_start": 4,
+    "weak_mob_end": 8,
+    "affiliate_risk_logit": 0.72,
+    "challenger_b_affiliate_share": 0.62,
+    "review_inflation_start_month_index": 14
+  }
+}
+

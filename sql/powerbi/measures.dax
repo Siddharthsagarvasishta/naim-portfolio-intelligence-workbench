@@ -1,0 +1,46 @@
+-- Generated from nAIM metric registry v1.0.0.
+Active Accounts :=
+CALCULATE(
+    DISTINCTCOUNT(FactAccountMonth[account_id]),
+    FactAccountMonth[inactive_flag] = 0,
+    FactAccountMonth[chargeoff_flag] = 0
+)
+
+Ending Receivables :=
+SUM(FactAccountMonth[account_balance])
+
+Portfolio Utilization :=
+DIVIDE(
+    SUM(FactAccountMonth[account_balance]),
+    SUM(FactAccountMonth[credit_limit])
+)
+
+30+ Delinquency Account Rate :=
+DIVIDE(
+    CALCULATE(
+        DISTINCTCOUNT(FactAccountMonth[account_id]),
+        FactAccountMonth[days_past_due] >= 30,
+        FactAccountMonth[chargeoff_flag] = 0
+    ),
+    [Active Accounts]
+)
+
+Annualised Net Loss Rate :=
+DIVIDE(
+    SUM(FactAccountMonth[chargeoff_amount])
+        - SUM(FactAccountMonth[recovery_amount]),
+    SUM(FactAccountMonth[average_daily_balance])
+) * 12
+
+Fraud BPS :=
+DIVIDE(
+    SUM(FactAccountMonth[confirmed_fraud_loss]),
+    SUM(FactAccountMonth[transaction_value])
+) * 10000
+
+False Positive Rate :=
+DIVIDE(
+    SUM(FactAccountMonth[false_positive_count]),
+    SUM(FactAccountMonth[fraud_alert_count])
+)
+

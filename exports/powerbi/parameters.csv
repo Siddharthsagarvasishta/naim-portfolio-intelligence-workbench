@@ -1,0 +1,8 @@
+parameter_name,type,default,allowed_or_example,purpose
+NaimExportRoot,text,./exports,Approved local or governed storage root,Power Query root
+ReportingPeriod,date,2025-12-31,Loaded DimDate values,Selected period
+ComparisonMode,text,Prior month,Prior month|Prior year|Budget|Scenario,Comparison calculation group
+MetricSelector,text,ANNUALISED_NET_LOSS_RATE,Governed metric IDs,Field parameter
+DimensionSelector,text,Acquisition channel,Approved dimensions,Field parameter
+TopN,whole_number,5,1-25,Contribution ranking
+MinimumSample,whole_number,100,Metric registry value,Visual suppression

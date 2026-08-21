@@ -1,0 +1,40 @@
+{
+  "registry_version": "1.0.0",
+  "live_templates": [
+    {
+      "template_id": "MONTHLY_KPI_MOVEMENT",
+      "grain": "account-month",
+      "methodology": "period comparison, governed KPI calculation, alert thresholds, exact decomposition",
+      "minimum_sample": 100,
+      "limitations": "Associational unless a valid experiment is used"
+    },
+    {
+      "template_id": "VINTAGE_DETERIORATION",
+      "grain": "origination vintage by months on book",
+      "methodology": "maturity-aligned curves and Wilson intervals",
+      "minimum_sample": 30,
+      "limitations": "Young vintages carry maturity warnings"
+    },
+    {
+      "template_id": "STRATEGY_EXPERIMENT",
+      "grain": "strategy observation",
+      "methodology": "sample-ratio mismatch, Wilson intervals, effect sizes and BH correction",
+      "minimum_sample": 100,
+      "limitations": "Rule-based assignment is observational"
+    },
+    {
+      "template_id": "CONCENTRATION_DEPENDENCY",
+      "grain": "partner-month or vendor-month",
+      "methodology": "HHI, Gini, degree and weighted-degree centrality",
+      "minimum_sample": 3,
+      "limitations": "Network centrality is not causal"
+    }
+  ],
+  "documented_integrations": [
+    "Kaplan-Meier and Cox survival",
+    "Difference-in-differences",
+    "Panel fixed effects",
+    "Bayesian small-sample partial pooling",
+    "SHAP model explanation"
+  ]
+}
