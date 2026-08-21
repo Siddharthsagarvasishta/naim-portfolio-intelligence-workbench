@@ -1,0 +1,11 @@
+{
+  "api_v1_operation_count": 118,
+  "contract": "outputs/contracts/openapi.json",
+  "declared_http_501_count": 0,
+  "errors": [],
+  "operation_count": 119,
+  "operation_id_count": 119,
+  "path_count": 113,
+  "sha256": "39d1d6c9b8f271055ae7043ff49dbb51a986f702caa15df144725d371a615ec3",
+  "status": "PASS"
+}
